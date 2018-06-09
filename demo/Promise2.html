@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise</title>
+  <script>
+  let ajax=function(){
+      console.log("执行")
+      return new Promise(function(resolve,reject){
+          setTimeout(function(){
+              resolve()
+          },1000)
+      });
+    }
+   ajax().then(function(){
+       console.log('执行2');
+        return new Promise(function(resolve,reject){
+       setTimeout(function(){
+         console.log('执行3');
+         resolve()
+       },1000)
+     });
+   })
+  {
+    let state = function* ()
+    {
+      while(true) {
+        yield 1;
+        yield 2;
+        yield 3;
+      }
+    }
+          let status=state();
+         console.log(status.next())
+         console.log(status.next())
+         console.log(status.next())
+         console.log(status.next())
+
+  }
+  {
+    let state =async function ()
+    {
+      while(true) {
+        await 1;
+        await 2;
+        await 3;
+      }
+    }
+    let status=state();
+    console.log(status.next())
+    console.log(status.next())
+    console.log(status.next())
+    console.log(status.next())
+
+  }
+  </script>
+</head>
+<body>
+
+</body>
+</html>

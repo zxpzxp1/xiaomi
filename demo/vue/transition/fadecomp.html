@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../../node_modules/vue/dist/vue.js"></script>
+  <style>
+
+  </style>
+</head>
+<body>
+<div id="app">
+    <fade :show="show">
+      <div>hello world</div>
+    </fade>
+  <button @click="handleBtnClick">切换</button>
+</div>
+<script>
+  Vue.component('fade',{
+    props:["show"],
+    template:`<transition @before-enter="handleBeforeEnter" @enter="handleEnter">
+               <slot v-if="show"></slot>
+              </transition>`,
+    methods:{
+        handleBeforeEnter:function(el){
+            el.style.color='red';
+       },handleEnter:function(el,done)
+      {
+        setTimeout(()=>{
+           el.style.color='green';
+           done();
+      },2000)
+
+      }
+    }
+  })
+  const app=new Vue({
+    el:'#app',
+    data:{
+      show:'true'
+    },
+    methods: {
+      handleBtnClick: function () {
+         this.show=!this.show;
+      }
+    }
+  })
+
+</script>
+</body>
+</html>

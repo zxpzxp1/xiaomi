@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
+  <style>
+    .activated {color:red}
+  </style>
+</head>
+<body>
+<div id="root" class="container">
+  <div @click="handleDivClick"
+       :class="{activated:isActivated}">
+    Hello world</div>
+  <div @click="handleDivClickArray"
+       :class="[activated,activatedOne]">
+    Array</div>
+  <!--<div @click="handleDivClickStyle"-->
+       <!--:style="styleObj">-->
+  <div @click="handleDivClickStyle"
+   :style="[styleObj,{fontSize:'20px'}]">
+ Obj</div>
+</div>
+<script>
+
+const vm=new Vue({
+ el:'#root',
+ data:{
+   isActivated:false,
+   activated:'',
+   activatedOne:'activated-one',
+   styleObj:{color:'black'}
+ },
+ methods:{
+    handleDivClick:function(){
+           this.isActivated=!this.isActivated
+  },handleDivClickArray:function(){
+     this.activated=this.activated==='activated'?'':'activated';
+   },handleDivClickStyle:function(){
+     this.styleObj.color=this.styleObj.color==="black"?"red":"black";
+   }
+ }
+})
+
+</script>
+</body>
+</html>

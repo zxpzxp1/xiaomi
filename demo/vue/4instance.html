@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="root" class="container">
+  <span @click="handleClick">{{message}}</span>
+  <item></item>
+</div>
+<script>
+  Vue.component('item',{
+  template:"<div>item</div>"});
+  const vm=new Vue({
+     el:'#root',
+     data:{
+       message:'test'
+     },methods:{
+      handleClick:function(){
+        alert("1");
+      }
+     },beforeCreate:function(){
+        console.log("beforeCreate");
+     },created:function(){
+      console.log("created");
+     },beforeMount:function()
+     {
+       console.log(this.$el,"beforeMount");
+     },
+     mounted:function()
+     {
+       console.log(this.$el,"mounted");
+     },
+     beforeDestroy()
+     {
+        console.log("beforeDestroy");
+     },
+     destroyed()
+     {
+       console.log("destroyed");
+     },
+     render(h){
+       console.log(this.$el,'render function invoked')
+       return h('div',{},this.message)
+     },beforeUpdate(){
+        console.log("beforeUpdate");
+     },updated(){
+        console.log("updated");
+     }
+     //vm.$data.message='1111' vm.message=2
+  })
+
+  console.log(vm)
+</script>
+</body>
+</html>

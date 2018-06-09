@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app" class="container">
+  <table>
+     <tbody>
+     <tr is="row"></tr>
+     <tr is="row"></tr>
+     <tr is="row"></tr>
+     </tbody>
+    <div ref="click" @click="handleClick">click</div>
+  </table>
+    <counter ref="one" @change="handleClick"></counter>
+    <counter ref="two" @change="handleClick"></counter>
+    <div>{{total}}</div>
+</div>
+<script>
+  Vue.component('row',{
+    template:`<tr><td>{{content}}</td></tr>`,
+    data:function() {
+      return  {content:'this is a row'}
+    }
+  })
+  Vue.component('counter',{
+    template:`<div @click="handleCounter">{{number}}</div>`,
+    data:function() {
+      return  {number:0}
+    },
+    methods:{
+      handleCounter:function(){
+          this.number++;
+          this.$emit("change");
+      }
+    }
+  })
+  const app=new Vue({
+     el:'#app',
+     data:{
+       content:'test',
+       total:0
+     },
+     methods:{
+       handleClick:function(){
+            console.log(this.$refs.click.innerHTML);
+//            console.log(this.$refs.one);
+            this.total=this.$refs.one.number+this.$refs.two.number;
+       }
+     }
+  })
+
+</script>
+</body>
+</html>

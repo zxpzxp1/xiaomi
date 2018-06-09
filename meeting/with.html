@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>[[$]]</title>
+</head>
+<body>
+/**
+* Created by ccb on 2018/4/28.
+*/
+<script>
+  with(this){
+    return _c(
+      'div',{
+        staticClass:"container",
+        attrs:{"id":"app"}
+      },
+      [
+        _c(
+          'input',
+          {
+            directives:[
+              {
+                name:"model",
+                rawName:"v-model",
+                value:(title),
+                expression:"title"
+              }
+            ],
+            attrs:{"type":"text"},
+            domProps:{
+              "value":(title)
+            },
+            on:{
+              "input":function($event)
+              {
+                if($event.target.composing)return;
+                title=$event.target.value
+              }
+            }
+          }),
+        _v(" "),
+        _c('button',
+        {
+          on:
+          {
+            "click":add
+          }
+        },
+        [_v("提交")]
+    ),
+      _v(" "),
+      _c('ul',
+        _l((list),function(item){
+          return _c(
+            'li',[_v(_s(item))]
+          )
+        })
+      )
+  ])}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
+  <script src="../../node_modules/vue-router/dist/vue-router.js"></script>
+  <script src="../../node_modules/vuex/dist/vuex.js"></script>
+</head>
+<body>
+<div id="app">
+  <h1>Hello App!</h1>
+  <router-link to="/user/123">user</router-link>
+
+  <router-view></router-view>
+</div>
+
+<script>
+  const User = {
+    props:['id'],
+    template: '<div>User {{ $route.params.id }}</div>',
+    mounted: function () {
+      this.param1 = this.$route.params.id;
+      console.log('$route',this.$route);
+      console.log('id',this.id);
+    }
+  }
+
+  const router = new VueRouter({
+    routes: [
+      { path: '/user/:id',component: User,props:true,
+        props:{id:456}
+//          props:(route)=>{{id:route.query.b}}
+      }
+    ]
+  })
+
+
+
+  new Vue({
+    el:"#app",
+    router:router,
+    mounted()
+    {
+
+    }
+//    beforeEnter(to,from,next){
+//       console.log('app route before enter')
+//    next()
+//   }
+  }
+  );
+</script>
+</body>
+</html>

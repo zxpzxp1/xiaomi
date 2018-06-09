@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>vue </title>
+</head>
+<body>
+
+<script>
+   var vm={}
+   var data={
+     name:'zhangshan',
+     age:20
+   }
+   var key,value
+   for(key in data)
+   {
+     (function(key)
+     {
+       Object.defineProperty(vm,key,
+         {
+           get:function() {
+             console.log('get init',data[key]);
+             return data[key];
+           },
+           set:function(newval){
+             data[key]=newval
+             console.log('set init',newval);
+           }
+         });
+     })(key)
+   }
+   function f1(){
+     with(data){
+       alert(name)
+       alert(age)}
+   }
+</script>
+</body>
+</html>

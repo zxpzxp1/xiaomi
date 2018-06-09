@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
+  <script src="../../node_modules/vue-router/dist/vue-router.js"></script>
+  <script src="../../node_modules/vuex/dist/vuex.js"></script>
+</head>
+<body>
+<div id="app">
+  <h1>Hello App!</h1>
+  <!--<router-link to="/home">home</router-link>-->
+  <router-link :to="{name:'home'}">home</router-link>
+  <router-link to="/admin">admin</router-link>
+  <transition name="fade">
+  <router-view></router-view>
+  </transition>
+</div>
+<style lang="css">
+    .fade-enter-active,.fade-leave-active {
+      transition: opacity .5s
+    }
+   .fade-enter,.fade-leave-to
+   {
+      opacity:0
+   }
+</style>
+<script>
+  const home = {
+    template:'<div>我是主页</div>'
+  };
+  const admin = {
+    template:'<div>我是管理页面</div>'
+  };
+  const routes = [
+    { path: '/home', component: home ,name:'home',
+      meta:{title:'this is home',description:'this is home' }},
+    { path: '/admin', component: admin }
+  ]
+  var router = new VueRouter({
+    routes:routes,
+//    base:'/base/',
+//    mode:'history'
+    linkActiveClass: 'active-link',
+    linkExactActiveClass: 'exact-active-link',
+    scrollBehavior(to,from,savePosition)
+    {
+        if(savePosition){
+          return savePosition
+        }else{
+          return {x:0,y:0}
+        }
+    },
+    fallback: true,
+    parseQuery (query){
+       console.log(query)
+     },
+    stringifyQuery (obj) {
+//    console.log('obj',obj)
+    }
+  });
+  new Vue({
+    el:"#app",
+    router:router
+
+
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
+  <script src="../../node_modules/vue-router/dist/vue-router.js"></script>
+  <script src="../../node_modules/vuex/dist/vuex.js"></script>
+</head>
+<body>
+<div id="app">
+  <h1>Hello App!</h1>
+  <router-link to="/home/123?a=1">home</router-link>
+  <router-link to="/home/456">home</router-link>
+  <router-link to="/admin/789/query">admin</router-link>
+  <router-view></router-view>
+  <!--<router-view name="a"></router-view>-->
+</div>
+
+<script>
+  const home = {
+    props:['id'],
+    template:'<div>我是主页{{$route.params.id}}</div>'
+  };
+  const admin = {
+    template:'<div>我是管理页面,参数为:{{param1}}</div>',
+    data: function () {
+      return {
+        param1:'',
+        param2:''
+      }
+    },
+    mounted: function () {
+      this.param1 = this.$route.params.userId;
+      console.log(this.$route);
+    }
+  };
+  const routes = [
+    { path: '/home/:id',props:{id:'789'},props:true,component: home,name:'home',beforeEnter(to,from,next)
+    {
+      console.log('before Enter routes 2');
+      next()
+    },beforeRouteEnter(to,from,next)
+    {
+      console.log('before Route Enter');
+      next()
+    },beforeRouteUpdate(to,from,next)
+    {
+      console.log('before Route Update');
+       next()
+     },beforeRouteLeave(to,from,next)
+     {
+     console.log('before Route Leave');
+      next()
+     } },
+    { path: '/admin/:userId/query',props:true, component: admin,name:'admin' }
+    //components:{default:home,a:home}
+  ]
+  var router = new VueRouter({
+    routes:routes
+  });
+  router.beforeEach((to,from,next)=>{
+           console.log('before Each 1');
+           next()
+//           if(to.fullPath==='/home')
+//           {
+//               next('/home');
+//           }
+//            else{
+//
+//           }
+  })
+  router.beforeResolve((to,from,next)=>{
+    console.log('before Resolve 1');
+  })
+  router.afterEach((to,from)=>{
+
+    console.log('after Each 1');
+  })
+  new Vue({
+    el:"#app",
+    router:router,
+    mounted()
+    {
+       console.log(this.$route)
+    },
+//    beforeEnter(to,from,next){
+//       console.log('app route before enter')
+//    next()
+//   }
+  }
+  );
+</script>
+</body>
+</html>

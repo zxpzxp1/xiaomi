@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="root" class="container">
+  <!--<div>{{name}}</div>-->
+  <div>{{fullName}}</div>
+</div>
+<script>
+
+  const vm=new Vue({
+    el:'#root',
+    data:{
+      firstName:'Jacky',
+      lastName:'Lee',
+      fullName:'Tom',
+      age:30
+    },
+//    computed:{
+//      name:function(){
+//        console.log('this computed');
+//       return this.firstName+' '+this.lastName;
+//      },
+//      names(){
+//        return this.firstName+' '+this.lastName;
+//      }
+//     },
+       watch:{
+         firstName:function(){
+           console.log('watch firstName');
+           this.fullName= this.firstName+' '+this.lastName;
+         },
+         lastName:function(){
+           console.log('watch lastName');
+           this.fullName= this.firstName+' '+this.lastName;
+         }
+       }
+  })
+
+</script>
+</body>
+</html>

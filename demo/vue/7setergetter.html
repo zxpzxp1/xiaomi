@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="root" class="container">
+  <!--<div>{{name}}</div>-->
+  <div>{{fullName}}</div>
+</div>
+<script>
+
+  const vm=new Vue({
+    el:'#root',
+    data:{
+      firstName:'Jacky',
+      lastName:'Lee',
+      age:30
+    },
+    computed: {
+            fullName:{
+                get:function(){
+                  return `${this.firstName} ${this.lastName}`;
+                },
+                set:function(value){
+                   console.log('set',value);
+                   var arr=value.split(' ');
+                   this.firstName=arr[0];
+                   this.lastName=arr[1];
+                }
+            }
+//         fullName:function(){
+//            return `${this.firstName} ${this.lastName}`;
+//         }
+    }
+  })
+
+</script>
+</body>
+</html>

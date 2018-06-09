@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../../node_modules/vue/dist/vue.js"></script>
+  <style>
+     .v-enter,.v-leave-to{
+       opacity: 0;
+     }
+     .v-enter-active,.v-leave-active{
+       transition: opactiy 1s;
+     }
+  </style>
+</head>
+<body>
+<div id="app">
+    <transition mode="out-in">
+      <!--<div v-if="show" key="hello">hello world</div>-->
+      <!--<div v-else key="bye">bye</div>-->
+      <!--<child-one v-if="show"></child-one>-->
+      <!--<child-two v-else></child-two>-->
+      <component :is="type"></component>
+    </transition>
+
+
+
+  <button @click="handleBtnClick">切换</button>
+</div>
+<script>
+  Vue.component('child-one',{
+    template:`<div v-once>child-one</div>`
+  });
+  Vue.component('child-two',{
+    template:`<div v-once>child-two</div>`
+  });
+  const app=new Vue({
+    el:'#app',
+    data:{
+      show:'true',
+      type:'child-one'
+    },
+    methods: {
+      handleBtnClick: function () {
+         this.show=!this.show;
+         this.type=this.type==='child-one'?'child-two':'child-one';
+      }
+
+    }
+  })
+</script>
+</body>
+</html>

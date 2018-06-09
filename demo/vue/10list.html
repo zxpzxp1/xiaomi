@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>列表渲染</title>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="root" class="container">
+   <div v-for="(item,index) in list" :key="item.id">
+      {{item.name}}:{{index}}
+  </div>
+  <div v-for="(item,key,index) in obj" :key="item">
+    {{item}}:{{key}}:{{index}}
+  </div>
+</div>
+<script>
+  //push pop shift unshift splice sort reverse
+  //vm.$set(vm.obj,'address','beijing')
+  const vm=new Vue({
+    el:'#root',
+    data:{
+      list:[{id:'1',name:'jocky'},{id:'2',name:'tom'}],
+      obj:{a:'A',b:'B',c:'C',d:'D',e:'E'}
+    }
+  })
+
+</script>
+</body>
+</html>

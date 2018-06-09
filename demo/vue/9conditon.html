@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>条件渲染</title>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="root" class="container">
+  <div v-if="show" >{{message}}</div>
+  <div v-else-if="show==='false'">B</div>
+  <div v-else>bye</div>
+  <div v-show="show">{{message}}</div>
+  <div v-if="show">
+       用户名<input key="userName"/>
+  </div>
+  <div v-else>
+       密码<input key="userPwd"/>
+  </div>
+</div>
+<script>
+
+  const vm=new Vue({
+    el:'#root',
+    data:{
+      message:'hello',
+      show:false
+    }
+
+  })
+
+</script>
+</body>
+</html>

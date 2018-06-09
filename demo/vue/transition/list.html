@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../../node_modules/vue/dist/vue.js"></script>
+  <style>
+  .v-enter,.v-leave-to{
+    opacity: 0;
+  }
+  .v-enter-active,.v-leave-active{
+    transition:opacity 1s;
+  }
+  </style>
+</head>
+<body>
+<div id="app">
+  <transition-group>
+   <div v-for="item of list" :key="item.id">
+     {{item.title}}
+   </div>
+  </transition-group>
+  <button @click="handleBtnClick">Add</button>
+</div>
+<script>
+  var count=0;
+  const app=new Vue({
+    el:'#app',
+    data:{
+      list:[],
+    },
+    methods: {
+      handleBtnClick: function () {
+            this.list.push({
+              id:count++,
+              title:'hi'
+            })
+      }
+
+    }
+  })
+</script>
+</body>
+</html>

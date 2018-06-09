@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+<child content="abcdefg"></child>
+</div>
+<script>
+  Vue.component('child',{
+//    props:['content'],
+      props:{
+         content:
+         {
+           type:String,
+           validator:function(value){
+             return (value.length>5)
+           }
+//           required:false,
+//           default:'default value'
+         }
+
+      },
+    template:'<div>{{content}}</div>'
+  })
+  const app=new Vue({
+     el:'#app',
+
+  })
+
+</script>
+</body>
+</html>
